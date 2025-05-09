@@ -1,65 +1,55 @@
-// scripts/depositBobBase.js
+
+// scripts/depositBobSepolia.js
 const { ethers } = require("hardhat");
 const { parseEther, formatEther } = require("ethers");
 require("dotenv").config();
 
 async function main() {
-  const [bob] = await ethers.getSigners();
-  console.log("👤 Using address:", bob.address);
-
-  // Contract addresses verification
-  console.log("📄 Token Contract:", process.env.TEST_TOKEN_BASE_SEPOLIA);
-  console.log("📄 Escrow Contract:", process.env.ESCROW_BASE_SEPOLIA);
+  const [Bob] = await ethers.getSigners();
+  console.log("Using address:", Bob.address);
 
   const token = await ethers.getContractAt(
     "TestToken", 
-    process.env.TEST_TOKEN_BASE_SEPOLIA,
-    bob
+    process.env.TEST_TOKEN_BASE_SEPOLIA1,
+    Bob
   );
   
   const escrow = await ethers.getContractAt(
     "Escrow", 
-    process.env.ESCROW_BASE_SEPOLIA,
-    bob
+    process.env.ESCROW_BASE_SEPOLIA1,
+    Bob
   );
 
-  // Check initial balances
-  const balance = await token.balanceOf(bob.address);
-  console.log("💰 Initial token balance:", formatEther(balance));
+  // Check balances first
+  const balance = await token.balanceOf(Bob.address);
+  console.log("Token balance:", formatEther(balance));
 
-  const amount = parseEther("20");
-  console.log("🔄 Trying to deposit:", formatEther(amount), "tokens");
+  const amount = parseEther("100");
+  console.log("Trying to deposit:", formatEther(amount));
 
-  // Check allowance before approval
-  const allowanceBefore = await token.allowance(bob.address, escrow.target);
-  console.log("👆 Current allowance:", formatEther(allowanceBefore));
+  // Check allowance
+  const allowanceBefore = await token.allowance(Bob.address, escrow.target);
+console.log("Current allowance:", formatEther(allowanceBefore));
 
-  // Approve tokens
-  console.log("⏳ Approving tokens...");
-  await token.approve(escrow.target, amount);
-  console.log("✅ Tokens approved");
+await token.approve(escrow.target, amount);
+console.log("✅ Approved");
 
-  // Verify allowance after approval
-  const allowanceAfter = await token.allowance(bob.address, escrow.target);
-  console.log("👆 New allowance:", formatEther(allowanceAfter));
+const allowanceAfter = await token.allowance(Bob.address, escrow.target);
+console.log("New allowance:", formatEther(allowanceAfter));
 
-  // Deposit tokens
-  console.log("⏳ Depositing tokens...");
+
+  // Try deposit
+  console.log("Attempting deposit...");
   const tx = await escrow.deposit(amount);
   await tx.wait();
-  console.log("✅ Deposit transaction hash:", tx.hash);
+  console.log("✅ Bob deposited on BASE_Sepolia:", tx.hash);
 
   // Verify final balance
-  const finalBalance = await token.balanceOf(bob.address);
-  console.log("💰 Final token balance:", formatEther(finalBalance));
-
-  // Calculate and show difference
-  const difference = balance - finalBalance;
-  console.log("📊 Total tokens deposited:", formatEther(difference));
+  const finalBalance = await token.balanceOf(Bob.address);
+  console.log("Final balance:", formatEther(finalBalance));
 }
 
 main().catch((error) => {
-  console.error("❌ Error occurred:");
-  console.error(error);
+  console.error("Error details:", error);
   process.exit(1);
 });

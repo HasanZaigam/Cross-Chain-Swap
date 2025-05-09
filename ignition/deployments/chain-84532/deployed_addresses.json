@@ -1,4 +1,6 @@
 {
-  "DeployBaseSepoliaToken#TestToken": "0x48b95b73FD3357127f0e6D864fd106743B21118a",
-  "DeployEscrowBaseSepolia#Escrow": "0x3A88126577A5498A0B13bD733ED6f3dB87E2c8E6"
+  "DeployTestToken#TestToken": "0x9BF7e9Ef56923B41243B6fF47B9C950980434648",
+  "DeployEscrowBaseSepolia#Escrow": "0xC0C4e8699545d9603B7bEb931F636Df9b8a812eC",
+  "DeployHybridEscrowSepolia#HybridEscrow": "0xa2B19918294D323E26a43ABc3D9F7CCC2B678664",
+  "DeployHybridEscrowBaseSepolia#HybridEscrow": "0x5CefE24F50C57dce7aBc4bc658134c16a5d6Da81"
 }

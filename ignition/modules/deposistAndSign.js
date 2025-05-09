@@ -3,8 +3,8 @@ const { ethers } = require("hardhat");
 async function main() {
   const [user] = await ethers.getSigners();
 
-  const escrowAddress = "PASTE_DEPLOYED_ESCROW_ON_SEPOLIA";
-  const tokenAddress = "PASTE_TOKEN_ON_SEPOLIA";
+  const escrowAddress = "0x3A88126577A5498A0B13bD733ED6f3dB87E2c8E6";
+  const tokenAddress = "0x48b95b73FD3357127f0e6D864fd106743B21118a";
   const amount = ethers.parseEther("100");
   const nonce = 1;
 

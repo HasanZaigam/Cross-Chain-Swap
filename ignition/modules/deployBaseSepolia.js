@@ -1,5 +1,4 @@
 const { buildModule } = require("@nomicfoundation/hardhat-ignition/modules");
-const { ethers } = require("hardhat");
 const { parseEther } = require("ethers");
 
 module.exports = buildModule("DeployBaseSepoliaToken", (m) => {

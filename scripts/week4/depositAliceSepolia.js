@@ -9,13 +9,13 @@ async function main() {
 
   const token = await ethers.getContractAt(
     "TestToken", 
-    process.env.TEST_TOKEN_SEPOLIA,
+    process.env.TEST_TOKEN_SEPOLIA1,
     alice
   );
   
   const escrow = await ethers.getContractAt(
     "Escrow", 
-    process.env.ESCROW_SEPOLIA,
+    process.env.ESCROW_SEPOLIA1,
     alice
   );
 
